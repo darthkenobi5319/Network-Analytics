@@ -1,49 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Oct 30 15:20:24 2019
+Created on Wed Oct 30 16:37:15 2019
 
 @author: Harry
 """
-import numpy as np
+from adjacencyMatrix import adjacencyMatrix
 
-fp = open('restaurants.txt')
-record = list()
-
+data = adjacencyMatrix()
 
 
-for line in fp:
-    sline = line.strip()
-    snames,restaurant = sline.split(';')
-    lnames = snames.split(',')
-    record.append(lnames)
+
+
+x,y = data.matrix.shape
+
+
+fp = open('problem2.out','w')
+for i in range(x):
+    for j in range(y):
+        if data.matrix[i,j] >= 1:
+            print(data.names[i],data.names[j],sep = ' ',file = fp)
 fp.close()
-    
-
-names = set()
-for i in record:
-    for j in i:
-        names.add(j)
-        
-names = list(names)
-names.sort()
-print(names)
-length = len(names)
-print(length)
-
-countMatrix = np.matrix(np.zeros((length, length)))
-
-
-for i in range(length):
-    for j in range(length):
-        A = names[i]
-        B = names[j]
-        if A == B:
-            continue
-        else:
-            for k in record:
-                if A in k and B in k:
-                    countMatrix[i,j] += 1
-
-
-countMatrixU = np.triu(countMatrix)
-print(countMatrixU)

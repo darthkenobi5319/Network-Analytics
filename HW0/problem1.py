@@ -32,5 +32,6 @@ for i in record.keys():
         newline += (j + ' ')
     line = newline.strip()
     print(line,file = fp)
-    
+
+print(record)    
  
